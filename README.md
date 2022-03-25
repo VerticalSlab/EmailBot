@@ -1,2 +1,2 @@
-# ScoutsBot
- For Scout
+# EmailBot
+To send Emails WIP
