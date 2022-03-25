@@ -7,6 +7,6 @@ const HelpEmbed = new Discord.MessageEmbed()
     .addFields(
         { name: '!help', value: 'posts the helpembed' },
         { name: '!mailinglist; <EmailAdress>', value: 'Add one Email Adress to mailing list.' },
-        { name: '!email; <Title(Subject)>; <Description(Text)>; <Mail(Leave blank for no mail)>', value: 'Embed command embeds messages if the mail tag is included it will send it to the mailing list as an E-mail' }
+        { name: '!email; <Title(Subject)>; <Description(Text)>', value: 'Sends an Email to the Email list Cannot use if you cant (@everyone or @here)' }
     )
 module.exports = HelpEmbed;
