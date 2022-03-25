@@ -104,6 +104,9 @@ dist
 .temp
 .cache
 
+# Docusaurus cache and generated files
+.docusaurus
+
 # Serverless directories
 .serverless/
 
@@ -125,8 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
 # misc
-
-**privateinfo.json
 **Emaillist.json
+**privateinfo.json

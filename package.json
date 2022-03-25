@@ -1,5 +1,23 @@
 {
   "dependencies": {
-    "nodemailer": "^6.7.2"
-  }
+    "discord.js": "^13.6.0",
+    "nodemailer": "^6.7.3"
+  },
+  "name": "emailbot",
+  "description": "For Scout",
+  "version": "1.0.0",
+  "main": "Botfiles/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinecraftGamer38/ScoutsBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinecraftGamer38/ScoutsBot/issues"
+  },
+  "homepage": "https://github.com/MinecraftGamer38/ScoutsBot#readme"
 }
