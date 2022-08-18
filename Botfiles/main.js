@@ -32,8 +32,6 @@ client.on('messageCreate', (msg) => {
 
     console.log(`Command:${cmd} Arguments:${args}`);
 
-    const Emaillist = JSON.parse(fs.readFileSync('./Emaillist.json'));
-
 
     if (cmd == 'email') {
         if (!msg.member.permissions.has(Discord.Permissions.FLAGS.MENTION_EVERYONE)) {
@@ -70,11 +68,15 @@ client.on('messageCreate', (msg) => {
             msg.channel.send('Sorry that E-mail is not valid');
             return;
         }
+        const Emaillist = JSON.parse(fs.readFileSync(`./Botfiles/Emaillist.json`));
+
         Emaillist[Emaillist.length++] = args[0];
         let data = JSON.stringify(Emaillist);
-        fs.writeFile('./Emaillist.json', data, (err) => {
+        fs.writeFile('./Botfiles/Emaillist.json', data, (err) => {
             if (err) {
                 console.log(err);
+            } else {
+                console.log('Succsesfuly added Email')
             }
         })
         msg.channel.send('Email Succsesfully Added')
