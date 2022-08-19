@@ -31,7 +31,7 @@ client.on('messageCreate', (msg) => {
     const cmd = args.shift().toLowerCase();
 
     console.log(`Command:${cmd} Arguments:${args}`);
-
+    const guildid = msg.guild.id;
 
     if (cmd == 'email') {
         if (!msg.member.permissions.has(Discord.Permissions.FLAGS.MENTION_EVERYONE)) {
@@ -70,7 +70,14 @@ client.on('messageCreate', (msg) => {
         }
         const Emaillist = JSON.parse(fs.readFileSync(`./Botfiles/Emaillist.json`));
 
-        Emaillist[Emaillist.length++] = args[0];
+        if (Emaillist[guildid] == null) {
+            Emaillist[guildid] = [agrs[0]];
+        } else {
+            var servermaillist = Emaillist[guildid];
+            servermaillist[servermaillist.length++] = args[0];
+            Emaillist[guildid] = servermaillist;
+        }
+        //Emaillist[servermaillist.length++] = args[0];
         let data = JSON.stringify(Emaillist);
         fs.writeFile('./Botfiles/Emaillist.json', data, (err) => {
             if (err) {
