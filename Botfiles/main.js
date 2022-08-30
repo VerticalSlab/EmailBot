@@ -33,6 +33,8 @@ client.on('messageCreate', (msg) => {
     console.log(`Command:${cmd} Arguments:${args}`);
     const guildid = msg.guild.id;
 
+    const Emaillist = JSON.parse(fs.readFileSync(`./Botfiles/Emaillist.json`));
+
     if (cmd == 'email') {
         if (!msg.member.permissions.has(Discord.Permissions.FLAGS.MENTION_EVERYONE)) {
             msg.channel.send('You are not trusted to send Emails')
@@ -45,7 +47,7 @@ client.on('messageCreate', (msg) => {
             .setDescription(args[1]);
         const embedmail = {
             from: 'noreplytroop302@gmail.com',
-            to: Emaillist.toString(),
+            to: Emaillist[guildid].toString(),
             subject: args[0],
             text: args[1]
         }
@@ -68,10 +70,9 @@ client.on('messageCreate', (msg) => {
             msg.channel.send('Sorry that E-mail is not valid');
             return;
         }
-        const Emaillist = JSON.parse(fs.readFileSync(`./Botfiles/Emaillist.json`));
 
         if (Emaillist[guildid] == null) {
-            Emaillist[guildid] = [agrs[0]];
+            Emaillist[guildid] = args[0];
         } else {
             var servermaillist = Emaillist[guildid];
             servermaillist[servermaillist.length++] = args[0];
