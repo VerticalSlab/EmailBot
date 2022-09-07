@@ -6,6 +6,7 @@ const privateinfo = require('./privateinfo.json');
 const HelpEmbed = require('./Helpembed.js')
 
 const nodemailer = require('nodemailer');
+const { channel } = require('diagnostics_channel');
 const transportmailer = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -66,6 +67,11 @@ client.on('messageCreate', (msg) => {
     }
 
     else if (cmd == 'mailinglist') {
+        if (args[0] == 'view') {
+            msg.channel.send(Emaillist[guildid].toString());
+            return
+        }
+
         if (!args[0].includes('@' || '.') || args[0].includes(' ')) {
             msg.channel.send('Sorry that E-mail is not valid');
             return;
