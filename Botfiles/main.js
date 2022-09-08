@@ -81,7 +81,12 @@ client.on('messageCreate', (msg) => {
             Emaillist[guildid] = [];
         }
         var servermaillist = Emaillist[guildid];
-        servermaillist[servermaillist.length++] = args[0];
+        let mailargscount = 0;
+        while(args[mailargscount] != null) {
+            servermaillist[servermaillist.length++] = args[mailargscount];
+            mailargscount++;
+        }
+        
         Emaillist[guildid] = servermaillist;
         //Emaillist[servermaillist.length++] = args[0];
         let data = JSON.stringify(Emaillist);
