@@ -88,7 +88,6 @@ client.on('messageCreate', (msg) => {
         }
         
         Emaillist[guildid] = servermaillist;
-        //Emaillist[servermaillist.length++] = args[0];
         let data = JSON.stringify(Emaillist);
         fs.writeFile('./Botfiles/Emaillist.json', data, (err) => {
             if (err) {
