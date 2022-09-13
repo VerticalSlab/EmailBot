@@ -47,7 +47,7 @@ client.on('messageCreate', (msg) => {
             .setTitle(args[0])
             .setDescription(args[1]);
         const embedmail = {
-            from: 'noreplytroop302@gmail.com',
+            from: privateinfo.username,
             to: Emaillist[guildid].toString(),
             subject: args[0],
             text: args[1]
@@ -55,10 +55,9 @@ client.on('messageCreate', (msg) => {
         console.log('E-mail sending...');
         transportmailer.sendMail(embedmail, (err, info) => {
             if (err) {
-                console.log(err)
+                console.log(err);
             } else {
                 console.log('E-mail Sent' + info.response);
-                msg.channel.send('Email Succsesfully Sent');
             }
         });
         // sends the embed
@@ -67,23 +66,31 @@ client.on('messageCreate', (msg) => {
     }
 
     else if (cmd == 'mailinglist') {
-        if (args[0] == 'view') {
-            msg.channel.send(Emaillist[guildid].toString());
-            return
-        }
-
-        if (!args[0].includes('@' || '.') || args[0].includes(' ')) {
-            msg.channel.send('Sorry that E-mail is not valid');
+        if (args[0] == 'view') {  
+            msg.channel.send(`Mailing List for ${msg.guild.name}: ${Emaillist[guildid]}`);
             return;
         }
-
-        if (Emaillist[guildid] == null) {
+        if (args[0] == 'clear') {
+            if (msg.member.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)){
+                msg.channel.send('You do not have permission to clear the MailingList');
+                return;
+            }
             Emaillist[guildid] = [];
+        } else {
+            if (!args[0].includes('@' || '.') || args[0].includes(' ')) {
+                msg.channel.send('Sorry that E-mail is not valid');
+                return;
+            }
+            var servermaillist = Emaillist[guildid];
+    
+            if (Emaillist[guildid] == null) {
+                Emaillist[guildid] = [];
+            }
+            
+            servermaillist = servermaillist.concat(args);
+            Emaillist[guildid] = servermaillist;
         }
-        var servermaillist = Emaillist[guildid];
-        servermaillist = servermaillist.concat(args);
         
-        Emaillist[guildid] = servermaillist;
         let data = JSON.stringify(Emaillist);
         fs.writeFile('./Botfiles/Emaillist.json', data, (err) => {
             if (err) {
