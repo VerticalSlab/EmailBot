@@ -1,7 +1,7 @@
 // Import Modules
 const Discord = require('discord.js');
 const fs = require('fs');
-const privateinfo = require('./privateinfo.json');
+const privateinfo = process.env.Privateinfo;
 
 const HelpEmbed = require('./Helpembed.js')
 
@@ -34,7 +34,7 @@ client.on('messageCreate', (msg) => {
     console.log(`Command:${cmd} Arguments:${args}`);
     const guildid = msg.guild.id;
 
-    const Emaillist = JSON.parse(fs.readFileSync(`./Botfiles/Emaillist.json`));
+    const Emaillist = JSON.parse(process.env.Emaillist);
 
     if (cmd == 'email') {
         if (!msg.member.permissions.has(Discord.Permissions.FLAGS.MENTION_EVERYONE)) {
@@ -93,13 +93,7 @@ client.on('messageCreate', (msg) => {
         }
         
         let data = JSON.stringify(Emaillist);
-        fs.writeFile('./Botfiles/Emaillist.json', data, (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Succsesfuly added Email')
-            }
-        })
+        process.env.Emaillist = data;
         msg.channel.send('Email Succsesfully Added')
     }
     else if (cmd == 'help') {
