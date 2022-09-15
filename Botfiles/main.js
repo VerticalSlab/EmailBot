@@ -81,13 +81,14 @@ client.on('messageCreate', (msg) => {
                 msg.channel.send('Sorry that E-mail is not valid');
                 return;
             }
-            var servermaillist = Emaillist[guildid];
-    
+            
             if (Emaillist[guildid] == null) {
                 Emaillist[guildid] = [];
             }
-            
-            servermaillist = servermaillist.concat(args);
+            var servermaillist = Emaillist[guildid];
+    
+            console.log(Emaillist, servermaillist);
+            servermaillist = [...servermaillist,...args];
             Emaillist[guildid] = servermaillist;
         }
         

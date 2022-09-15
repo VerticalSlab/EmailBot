@@ -6,8 +6,9 @@ const HelpEmbed = new Discord.MessageEmbed()
     .setDescription('All agruments seperated by "; " the prefix is "!".')
     .addFields(
         { name: '!help', value: 'posts the helpembed' },
-        { name: '!mailinglist; <EmailAdress>; <EmailAdress>; <EmailAdress>, ...', value: 'Adds Email Adress(es) to mailing list.' },
+        { name: '!mailinglist; <EmailAdress>; <EmailAdress>; <EmailAdress>, ...', value: 'Adds an Email Adress(es) to mailing list.' },
         { name: '!mailinglist; view', value: 'shows the contents of the Mail List'},
-        { name: '!email; <Title(Subject)>; <Description(Body)>', value: 'Sends an Email to the Email list Cannot use if you cant (@everyone or @here)' }
+        { name: '!mailinglist; clear', value: 'Clears the mailing list THIS IS IRREVERSABLE AND CANNOT BE UNDONE !!!You must be an admin to use this command!!!'}
+        { name: '!email; <Title(Subject)>; <Description(Body)>', value: 'Sends an Email to the Email list for the server you are on. Also Sends the Message as an embed !!!Cannot use if you cannot mention everyone!!!' }
     )
 module.exports = HelpEmbed;
