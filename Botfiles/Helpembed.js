@@ -8,7 +8,7 @@ const HelpEmbed = new Discord.MessageEmbed()
         { name: '!help', value: 'posts the helpembed' },
         { name: '!mailinglist; <EmailAdress>; <EmailAdress>; <EmailAdress>, ...', value: 'Adds an Email Adress(es) to mailing list.' },
         { name: '!mailinglist; view', value: 'shows the contents of the Mail List'},
-        { name: '!mailinglist; clear', value: 'Clears the mailing list THIS IS IRREVERSABLE AND CANNOT BE UNDONE !!!You must be an admin to use this command!!!'}
+        { name: '!mailinglist; clear', value: 'Clears the mailing list THIS IS IRREVERSABLE AND CANNOT BE UNDONE !!!You must be an admin to use this command!!!'},
         { name: '!email; <Title(Subject)>; <Description(Body)>', value: 'Sends an Email to the Email list for the server you are on. Also Sends the Message as an embed !!!Cannot use if you cannot mention everyone!!!' }
     )
 module.exports = HelpEmbed;
