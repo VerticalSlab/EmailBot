@@ -9,8 +9,8 @@ const { channel } = require('diagnostics_channel');
 const transportmailer = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: privateinfo.username,
-        pass: privateinfo.password
+        user: process.env['username'],
+        pass: process.env['password']
     }
 })
 
