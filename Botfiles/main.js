@@ -113,3 +113,13 @@ client.on('messageCreate', (msg) => {
 });
 
 client.login(process.env['token']);
+
+const express = require('express')
+const app = express();
+const port = 3000;
+app.get('/', (req, res) => {
+  res.send('https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjTuYSxtu36AhWuHzQIHZaBB-wQtwJ6BAgoEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoHg5SJYRHA0&usg=AOvVaw0mZdY4jTnKHqwk07LTTExU')
+})
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
