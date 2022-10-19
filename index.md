@@ -4,7 +4,7 @@ A discord bot to send Emails so you never have to open an Email Client.
 
 Great for newsletters on a discord server
 
-This is a WIP ONLY WORKS ON ONE SERVER :( (Will be fixed)
+Works on multiple servers at the same time (Public bot coming soon!!!)
 
 ### Copy this Repo and try it out
 
