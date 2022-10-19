@@ -37,7 +37,7 @@ client.on('messageCreate', (msg) => {
     envdata.get(`${guildid}maillist`).then((mailliststring) => {
         let maillist = JSON.parse(mailliststring);
         if (maillist == null){
-        envdata.set(`${guildid}maillist`, "[]" ).then(() => {
+        envdata.set(`${guildid}maillist`, '[]' ).then(() => {
           msg.channel.send(`First command, added new mailinglist to ${msg.guild.name} your command was cancelled`);
           return;
         });
@@ -58,7 +58,7 @@ client.on('messageCreate', (msg) => {
                 .setDescription(args[1]);
             const embedmail = {
                 from: process.env['username'],
-                to: Emaillist[guildid].toString(),
+                to: maillist.toString(),
                 subject: args[0],
                 text: args[1]
             }
@@ -76,32 +76,32 @@ client.on('messageCreate', (msg) => {
         }
     
         else if (cmd == 'mailinglist') {
-            if (args[0] == 'view') {  
+          var tempmaillist = maillist  
+          if (args[0] == 'view') {  
                 msg.channel.send(`Mailing List for ${msg.guild.name}: ${maillist.toString()}`);
                 return;
-            }
-            if (args[0] == 'clear') {
-                if (msg.member.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)){
-                    msg.channel.send('You do not have permission to clear the MailingList');
+          }
+          if (args[0] == 'clear') {
+            if (!msg.member.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)){
+                    msg.channel.send('You do not have permission to clear the Mailing List');
                     return;
                 }
-                maillist = [];
-            } else {
-                if (!args[0].includes('@' || '.') || args[0].includes(' ')) {
+                tempmaillist = [];
+                envdata.set(`${guildid}maillist`, JSON.stringify(tempmaillist)).then(() => {
+                  msg.channel.send('Email list succsesfuly cleared');
+                });
+                return;
+          } else {
+            if (!args[0].includes('@' || '.') || args[0].includes(' ')) {
                     msg.channel.send('Sorry that E-mail is not valid');
                     return;
-                }
+            }
                 var tempmaillist = maillist
                 tempmaillist = [...tempmaillist,...args];
             }
-            fs.writeFile('./Botfiles/Emaillist.json', data, (err) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('Succsesfuly added Email')
-                }
-            })
-            msg.channel.send('Email Succsesfully Added')
+            envdata.set(`${guildid}maillist`, JSON.stringify(tempmaillist)).then(() => {
+              msg.channel.send('Email Succsesfully Added');
+            });
         }
       }
     });
