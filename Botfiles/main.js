@@ -1,9 +1,10 @@
 // Import Modules
 const Discord = require('discord.js');
 const fs = require('fs');
-
+const Database = require("@replit/database")
+const envdata = new Database();
 const HelpEmbed = require('./Helpembed.js')
-
+ 
 const nodemailer = require('nodemailer');
 const { channel } = require('diagnostics_channel');
 const transportmailer = nodemailer.createTransport({
@@ -33,9 +34,20 @@ client.on('messageCreate', (msg) => {
     console.log(`Command:${cmd} Arguments:${args}`);
     const guildid = msg.guild.id;
 
-    const Emaillist = JSON.parse(fs.readFileSync(`./Botfiles/Emaillist.json`));
+    envdata.get(`${guildid}maillist`).then((maillist) => {
+      if (maillist == null){
+        envdata.set(`${guildid}maillist`, [] ).then(() => {
+          msg.channel.send(`First command, added new mailinglist to ${msg.guild.name}`)
+        });
+      }
+    });
+    
 
-    if (cmd == 'email') {
+    if (cmd == 'help') {
+        msg.channel.send({ embeds: [HelpEmbed] });
+    }  
+    else if (cmd == 'email') {
+        db.get
         if (!msg.member.permissions.has(Discord.Permissions.FLAGS.MENTION_EVERYONE)) {
             msg.channel.send('You are not trusted to send Emails')
             return;
@@ -46,7 +58,7 @@ client.on('messageCreate', (msg) => {
             .setTitle(args[0])
             .setDescription(args[1]);
         const embedmail = {
-            from: privateinfo.username,
+            from: process.env['username'],
             to: Emaillist[guildid].toString(),
             subject: args[0],
             text: args[1]
@@ -101,9 +113,7 @@ client.on('messageCreate', (msg) => {
         })
         msg.channel.send('Email Succsesfully Added')
     }
-    else if (cmd == 'help') {
-        msg.channel.send({ embeds: [HelpEmbed] });
-    }
+    
 
 });
 
